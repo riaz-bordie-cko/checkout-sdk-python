@@ -69,12 +69,17 @@ class Timeout(CheckoutSdkError):
 
 class TooManyRequestsError(CheckoutSdkError):
     def __init__(self, **kwargs):
-        message = kwargs.pop(
-            'message', 'Requests blocked due to API request throttling.')
+        message = kwargs.pop('message', 'Requests blocked due to API request throttling.')
         super().__init__(message=message, **kwargs)
 
 
 class ApiError(CheckoutSdkError):
     def __init__(self, **kwargs):
         message = kwargs.pop('message', 'General API error.')
+        super().__init__(message=message, **kwargs)
+
+
+class InvalidSignatureError(CheckoutSdkError):
+    def __init__(self, **kwargs):
+        message = kwargs.pop('message', 'Invalid event signature.')
         super().__init__(message=message, **kwargs)

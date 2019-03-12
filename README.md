@@ -214,6 +214,38 @@ except sdk.errors.CheckoutSdkError as e:
     print('{0.http_status} {0.error_code} {0.elapsed} {0.event_id} // {0.message}'.format(e))
 ```
 
+
+### Webhooks
+
+#### Event management
+
+``` python
+try:
+    secret_key = os.environ['CKO_SECRET_KEY']
+    request_signature = request.META.get('HTTP_CKO_SIGNATURE', '')
+    body = request.body
+    event = webhooks.parse(body, secret_key, request_signature)
+    print(event.id)
+    print(event.event_type)
+    
+except sdk.errors.InvalidSignatureError as e:
+    print('Invalid event signature.')
+```
+
+#### Signature validation
+
+``` python
+try:
+    secret_key = os.environ['CKO_SECRET_KEY']
+    request_signature = request.META.get('HTTP_CKO_SIGNATURE', '')
+    body = request.body
+    verify_signature(body, secret_key, request_signature)
+    
+except sdk.errors.InvalidSignatureError as e:
+    print('Invalid event signature.')
+```
+
+
 ### Exception handling
 
 ``` python
