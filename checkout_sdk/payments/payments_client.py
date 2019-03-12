@@ -93,7 +93,7 @@ class PaymentsClient(ApiClient):
 
     def alternative_payment_request(self,
                                     apm_id, payment_token,
-                                    user_data=None, customer=None, *kwargs):
+                                    user_data=None, customer=None, **kwargs):
 
         Utils.validate_ap_transaction(
             apm_id=apm_id, payment_token=payment_token, user_data=user_data)
